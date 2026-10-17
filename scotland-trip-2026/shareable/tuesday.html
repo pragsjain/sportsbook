@@ -16,9 +16,17 @@ main{padding:24px}.card{background:#fff;border:1px solid #e4dccf;border-radius:1
 .note{background:#fff3d8;border-color:#ead49d}#map{height:420px;border-radius:16px}
 a{color:var(--navy);font-weight:bold}.section-anchor{scroll-margin-top:72px}
 @media(max-width:700px){main{padding:16px}#map{height:340px}}
+
+.mg-stamp{display:inline-flex;align-items:center;gap:8px;margin:0 0 12px;padding:7px 12px;border:1px solid rgba(255,255,255,.55);border-radius:999px;background:rgba(255,255,255,.12);color:#fff;text-decoration:none;font:700 13px/1 Arial,sans-serif;letter-spacing:.04em}
+.mg-stamp .mg-mark{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#fff;color:#173a5e;font-weight:800}
+.mg-stamp:hover{background:rgba(255,255,255,.22)}
+.mg-watermark{position:fixed;right:12px;bottom:12px;z-index:100;pointer-events:none;display:flex;align-items:center;gap:6px;padding:7px 10px;border:1px solid rgba(23,58,94,.2);border-radius:999px;background:rgba(247,242,232,.88);color:#173a5e;font:700 12px/1 Arial,sans-serif;letter-spacing:.04em;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.mg-watermark .mg-mark{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#173a5e;color:#fff;font-weight:800}
+.save-map-btn{display:inline-flex;align-items:center;gap:8px;margin:12px 0 0;padding:11px 16px;border:0;border-radius:999px;background:#173a5e;color:#fff;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 3px 9px rgba(23,58,94,.18)}
+.save-map-btn:hover{background:#24527d}.save-map-btn:focus-visible{outline:3px solid #b4863f;outline-offset:3px}
 </style></head>
 <body>
-<header><div class="in"><p><a class="back" href="index.html">← Scotland Road Trip</a></p><h1>Tuesday 22 September — Skye to Edinburgh via Pitlochry</h1><p>Kyleakin → A86 / A9 → Pitlochry → Edinburgh → train south</p></div></header>
+<header><div class="in"><p><a class="back" href="index.html">← Scotland Road Trip</a></p><div class="mg-stamp" aria-label="MostlyGhumo travel guide"><span class="mg-mark">MG</span><span>MostlyGhumo</span></div><h1>Tuesday 22 September — Skye to Edinburgh via Pitlochry</h1><p>Kyleakin → A86 / A9 → Pitlochry → Edinburgh → train south</p></div></header>
 <nav class="section-menu"><a href="#plan">Day plan</a><a href="#map-section">Route map</a><a href="#details">Stops &amp; notes</a></nav>
 <main>
 <section class="card section-anchor" id="plan"><span class="tag">🚗 Highlands to Edinburgh</span><span class="tag">🌿 Scenic return</span>
@@ -29,7 +37,7 @@ a{color:var(--navy);font-weight:bold}.section-anchor{scroll-margin-top:72px}
 <div class="time"><b>Afternoon</b> — Continue south to Edinburgh. Return the car, then head to Waverley for the evening train.</div>
 <div class="time"><b>19:20</b> — Scheduled direct train from Edinburgh to London King’s Cross; leave a generous buffer for the car return and station transfer.</div>
 </section>
-<section class="card section-anchor" id="map-section"><h2>Tuesday route map</h2><div id="map"></div></section>
+<section class="card section-anchor" id="map-section"><h2>Tuesday route map</h2><div id="map"></div><button class="save-map-btn" type="button" onclick="saveRouteImage(stops,'Tuesday — Skye to Edinburgh via Pitlochry')">⇩ Save map image</button></section>
 <section class="card section-anchor" id="details"><h2>Stops and practical notes</h2>
 <h3>Pitlochry</h3><p>A useful midpoint to break up the drive. The town centre, riverside paths and dam area make for an easy stop without committing to a long hike.</p>
 <h3>Keep the return day simple</h3><p>Choose one relaxed stop in Pitlochry, keep an eye on the clock, and allow extra time for traffic on the A9 and the journey into Edinburgh.</p>
@@ -44,4 +52,25 @@ const stops=[['Kyleakin',57.27246,-5.7305],['A86 junction',56.819,-5.112],['Pitl
 stops.forEach(s=>L.marker([s[1],s[2]]).addTo(m).bindPopup('<b>'+s[0]+'</b>'));
 L.polyline(stops.map(s=>[s[1],s[2]]),{weight:4,opacity:.78,color:'#b4863f'}).addTo(m);
 m.fitBounds(stops.map(s=>[s[1],s[2]]),{padding:[25,25]});
+</script><div class="mg-watermark" aria-hidden="true"><span class="mg-mark">MG</span>MostlyGhumo</div><script>
+function saveRouteImage(stops,title){
+  const pts=(stops||[]).map(s=>({name:String(s[0]),lat:Number(s[1]),lon:Number(s[2])})).filter(s=>Number.isFinite(s.lat)&&Number.isFinite(s.lon));
+  if(!pts.length){alert('This map has no route stops to save.');return;}
+  const c=document.createElement('canvas'),ctx=c.getContext('2d');c.width=1600;c.height=1280;
+  const W=c.width,H=c.height;ctx.fillStyle='#f7f2e8';ctx.fillRect(0,0,W,H);ctx.fillStyle='#173a5e';ctx.fillRect(0,0,W,148);
+  ctx.fillStyle='#fff';ctx.font='700 30px Arial';ctx.fillText('MG  MOSTLYGHUMO',76,61);ctx.font='700 42px Georgia';ctx.fillText(title,76,116);
+  const box={x:90,y:190,w:1420,h:650};ctx.fillStyle='#eaf1ed';ctx.fillRect(box.x,box.y,box.w,box.h);ctx.strokeStyle='#d7e2dc';ctx.lineWidth=2;
+  for(let i=1;i<7;i++){let x=box.x+box.w*i/7;ctx.beginPath();ctx.moveTo(x,box.y);ctx.lineTo(x,box.y+box.h);ctx.stroke();}
+  for(let i=1;i<5;i++){let y=box.y+box.h*i/5;ctx.beginPath();ctx.moveTo(box.x,y);ctx.lineTo(box.x+box.w,y);ctx.stroke();}
+  const minLon=Math.min(...pts.map(p=>p.lon)),maxLon=Math.max(...pts.map(p=>p.lon)),minLat=Math.min(...pts.map(p=>p.lat)),maxLat=Math.max(...pts.map(p=>p.lat));
+  const padX=100,padY=75,dx=Math.max(.01,maxLon-minLon),dy=Math.max(.01,maxLat-minLat);
+  const pos=pts.map(p=>({x:box.x+padX+(p.lon-minLon)/dx*(box.w-2*padX),y:box.y+padY+(maxLat-p.lat)/dy*(box.h-2*padY)}));
+  ctx.strokeStyle='#b4863f';ctx.lineWidth=9;ctx.lineJoin='round';ctx.lineCap='round';ctx.beginPath();pos.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.stroke();
+  pos.forEach((p,i)=>{ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(p.x,p.y,24,0,Math.PI*2);ctx.fill();ctx.fillStyle='#173a5e';ctx.beginPath();ctx.arc(p.x,p.y,19,0,Math.PI*2);ctx.fill();ctx.fillStyle='#fff';ctx.font='700 18px Arial';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(String(i+1),p.x,p.y);});
+  ctx.textAlign='left';ctx.textBaseline='alphabetic';const cols=pts.length>8?2:1,perCol=Math.ceil(pts.length/cols),startY=910,rowH=42,colW=700;
+  ctx.fillStyle='#173a5e';ctx.font='700 25px Georgia';ctx.fillText('ROUTE STOPS',90,885);
+  pts.forEach((p,i)=>{const col=Math.floor(i/perCol),row=i%perCol,x=90+col*colW,y=startY+row*rowH;ctx.fillStyle='#b4863f';ctx.font='700 20px Arial';ctx.fillText(String(i+1).padStart(2,'0'),x,y);ctx.fillStyle='#162033';ctx.font='20px Arial';ctx.fillText(p.name.slice(0,46),x+48,y);});
+  ctx.fillStyle='#667085';ctx.font='16px Arial';ctx.fillText('Stylised route overview • Use the live map for turn-by-turn navigation',90,H-35);
+  c.toBlob(blob=>{if(!blob){alert('Could not create the image. Please try again.');return;}const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='mostlyghumo-'+title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'-map.png';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);},'image/png');
+}
 </script></body></html>
