@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tuesday | Skye to Edinburgh via Pitlochry</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+:root{--navy:#173a5e;--cream:#f7f2e8;--gold:#b4863f;--ink:#162033;--muted:#667085}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--cream);color:var(--ink);line-height:1.6}
+header{background:linear-gradient(135deg,#173a5e,#295f8c);color:#fff;padding:36px 22px}header .in,main{max-width:980px;margin:auto}
+h1,h2,h3{font-family:Georgia,serif}h1{font-size:clamp(32px,6vw,52px);margin:0 0 8px}
+.back{color:#fff}.section-menu{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.97);border-bottom:1px solid #ddd;padding:10px 12px;display:flex;gap:8px;overflow-x:auto;white-space:nowrap}
+.section-menu a{padding:8px 11px;border-radius:999px;background:#edf3f7;color:var(--navy);text-decoration:none;font-size:14px;font-weight:bold}
+main{padding:24px}.card{background:#fff;border:1px solid #e4dccf;border-radius:18px;padding:20px;margin:16px 0}
+.tag{display:inline-block;background:#edf3f7;padding:7px 10px;border-radius:999px;margin:4px}.time{border-left:4px solid var(--gold);padding:4px 0 4px 14px;margin:14px 0}
+.note{background:#fff3d8;border-color:#ead49d}#map{height:420px;border-radius:16px}
+a{color:var(--navy);font-weight:bold}.section-anchor{scroll-margin-top:72px}
+@media(max-width:700px){main{padding:16px}#map{height:340px}}
+</style></head>
+<body>
+<header><div class="in"><p><a class="back" href="index.html">← Scotland Road Trip</a></p><h1>Tuesday 22 September — Skye to Edinburgh via Pitlochry</h1><p>Kyleakin → A86 / A9 → Pitlochry → Edinburgh → train south</p></div></header>
+<nav class="section-menu"><a href="#plan">Day plan</a><a href="#map-section">Route map</a><a href="#details">Stops &amp; notes</a></nav>
+<main>
+<section class="card section-anchor" id="plan"><span class="tag">🚗 Highlands to Edinburgh</span><span class="tag">🌿 Scenic return</span>
+<h2>Detailed plan</h2>
+<div class="time"><b>Morning</b> — Have breakfast, pack, and leave Kyleakin with enough time for a relaxed drive east and south.</div>
+<div class="time"><b>On the road</b> — Follow the main route through the Highlands, connecting to the A86 and then the A9 south. Keep the schedule flexible for road conditions and short comfort stops.</div>
+<div class="time"><b>Pitlochry</b> — Pause in town for lunch, a leg stretch and a walk along the River Tummel. If time allows, browse the high street or visit the dam and fish ladder area.</div>
+<div class="time"><b>Afternoon</b> — Continue south to Edinburgh. Return the car, then head to Waverley for the evening train.</div>
+<div class="time"><b>19:20</b> — Scheduled direct train from Edinburgh to London King’s Cross; leave a generous buffer for the car return and station transfer.</div>
+</section>
+<section class="card section-anchor" id="map-section"><h2>Tuesday route map</h2><div id="map"></div></section>
+<section class="card section-anchor" id="details"><h2>Stops and practical notes</h2>
+<h3>Pitlochry</h3><p>A useful midpoint to break up the drive. The town centre, riverside paths and dam area make for an easy stop without committing to a long hike.</p>
+<h3>Keep the return day simple</h3><p>Choose one relaxed stop in Pitlochry, keep an eye on the clock, and allow extra time for traffic on the A9 and the journey into Edinburgh.</p>
+<p><a href="https://www.google.com/maps/search/?api=1&query=Pitlochry%2C+Scotland" target="_blank" rel="noopener">Open Pitlochry in Maps ↗</a></p>
+</section>
+</main>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const m=L.map('map',{scrollWheelZoom:false}).setView([56.8,-4.8],7);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors'}).addTo(m);
+const stops=[['Kyleakin',57.27246,-5.7305],['A86 junction',56.819,-5.112],['Pitlochry',56.705,-3.734],['Edinburgh',55.9533,-3.1883]];
+stops.forEach(s=>L.marker([s[1],s[2]]).addTo(m).bindPopup('<b>'+s[0]+'</b>'));
+L.polyline(stops.map(s=>[s[1],s[2]]),{weight:4,opacity:.78,color:'#b4863f'}).addTo(m);
+m.fitBounds(stops.map(s=>[s[1],s[2]]),{padding:[25,25]});
+</script></body></html>
