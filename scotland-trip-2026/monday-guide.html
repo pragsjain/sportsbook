@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#173f46">
+<meta name="description" content="A realistic, flexible one-day Isle of Skye route from MostlyGhumo: Storr, Lealt Falls, Kilt Rock, the Quiraing and Fairy Glen.">
+<meta property="og:title" content="One Full Day on Skye | MostlyGhumo">
+<meta property="og:description" content="A scenic Trotternish loop, with a flexible pace, practical stops and room for Skye's changing weather.">
+<title>One Full Day on Skye | MostlyGhumo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+:root{--ink:#193337;--green:#173f46;--teal:#2c6b68;--muted:#5c7070;--cream:#f6f5ef;--paper:#fff;--line:#dce5df;--sun:#f4d56c;--sunlight:#fff6d5;--shadow:0 14px 38px rgba(24,60,61,.09)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.65 "DM Sans",Arial,sans-serif}a{color:#175a56}header{background:linear-gradient(130deg,rgba(18,54,58,.94),rgba(34,91,87,.86)),url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=85') center/cover;color:white;padding:26px 20px 62px}.top,.wrap{max-width:1080px;margin:auto}.brand{display:flex;align-items:center;gap:10px;font-size:13px;letter-spacing:.13em;font-weight:700}.monogram{display:grid;place-items:center;width:35px;height:35px;border-radius:50%;background:var(--sun);color:var(--green);font:800 14px Manrope}.hero{max-width:700px;padding-top:60px}.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:12px;font-weight:700;color:var(--sun)}h1,h2,h3{font-family:Manrope,Arial,sans-serif;line-height:1.2}h1{font-size:clamp(2.4rem,7vw,4.4rem);margin:10px 0 14px;max-width:650px}header p{font-size:18px;max-width:620px;color:#edf4f0;margin:0}.chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}.chip{border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:7px 12px;font-size:13px}.nav{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);padding:8px 14px;display:flex;gap:8px;overflow:auto}.nav a{white-space:nowrap;text-decoration:none;padding:8px 12px;border-radius:999px;background:#edf3ef;font-size:13px;font-weight:700;color:var(--green)}main{padding:22px 18px 52px}.wrap{width:100%}.intro{display:grid;grid-template-columns:1.3fr .7fr;gap:18px;margin:0 auto 20px}.card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--shadow);margin:18px 0}.intro .card{margin:0}.card h2{font-size:22px;margin:0 0 12px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{border-radius:14px;background:#f1f6f3;padding:14px}.stat b{display:block;font:800 20px Manrope;color:var(--green)}.stat span{font-size:12px;color:var(--muted)}.callout{background:var(--sunlight);border:1px solid #efdc8e;border-radius:15px;padding:15px 17px;margin:14px 0}.callout strong{color:#4c471f}.route{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}.stop{position:relative;background:#f2f6f3;border-radius:15px;padding:15px}.num{display:grid;place-items:center;width:27px;height:27px;border-radius:50%;background:var(--teal);color:white;font-weight:700;font-size:13px;margin-bottom:8px}.stop h3{font-size:15px;margin:0 0 5px}.stop p{font-size:13px;color:var(--muted);margin:0}.stop small{display:inline-block;margin-top:9px;font-weight:700;color:var(--teal)}.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}.btn{display:inline-block;background:var(--green);color:white;border-radius:999px;padding:11px 16px;font-weight:700;text-decoration:none}.btn.alt{background:#edf3ef;color:var(--green)}#map{height:420px;border-radius:16px;overflow:hidden;border:1px solid var(--line)}.mini{font-size:13px;color:var(--muted)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.option{border:1px solid var(--line);border-radius:15px;padding:16px}.option h3{margin:0 0 8px;font-size:17px}.option ul{padding-left:19px;margin:8px 0}.option li{margin:5px 0}.tip{background:#f1f6f3;border-left:4px solid var(--teal);padding:14px 16px;border-radius:0 13px 13px 0;margin:12px 0}.source-links{display:flex;gap:10px;flex-wrap:wrap}.source-links a{font-size:14px}footer{text-align:center;color:var(--muted);padding:25px 18px 36px;border-top:1px solid var(--line);font-size:13px}.footer-brand{font:800 13px Manrope;letter-spacing:.12em;color:var(--green)}.anchor{scroll-margin-top:70px}
+@media(max-width:760px){.intro{grid-template-columns:1fr}.route{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}.hero{padding-top:45px}.card{padding:18px}.stats{gap:7px}.stat{padding:11px}.stat b{font-size:17px}#map{height:340px}}
+@media(max-width:420px){.route{grid-template-columns:1fr}.chips{gap:6px}.chip{font-size:12px}}
+@media print{.nav,.buttons,.brand{display:none}body{background:white}header{padding:25px;color:white}.card{box-shadow:none;break-inside:avoid}}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <div class="brand"><span class="monogram">MG</span><span>MOSTLYGHUMO</span></div>
+    <div class="hero">
+      <div class="eyebrow">Scotland · A day on Skye</div>
+      <h1>One full day on the Isle of Skye</h1>
+      <p>A scenic north Skye loop with dramatic viewpoints, short walks and enough breathing room to enjoy the journey between stops.</p>
+      <div class="chips"><span class="chip">🚗 Full-day road trip</span><span class="chip">📍 Trotternish Peninsula</span><span class="chip">🌦️ Weather-flexible</span></div>
+    </div>
+  </div>
+</header>
+<nav class="nav" aria-label="Page sections"><a href="#overview">At a glance</a><a href="#route">Route</a><a href="#map-section">Map</a><a href="#pace">Choose your pace</a><a href="#tips">Before you go</a></nav>
+<main><div class="wrap">
+<section id="overview" class="intro anchor">
+  <div class="card"><h2>The day at a glance</h2><p>Start from the south of Skye, head north through Portree, then follow the Trotternish coast and return. The two headline landscapes are the <b>Old Man of Storr</b> and the <b>Quiraing</b>; keep the smaller stops flexible.</p><div class="stats"><div class="stat"><b>~130 mi</b><span>route estimate</span></div><div class="stat"><b>~3¾ hrs</b><span>driving before stops</span></div><div class="stat"><b>Full day</b><span>allow for walks + weather</span></div></div><p class="mini">These are planning estimates. Single-track roads, traffic, parking and photo stops can add time.</p></div>
+  <div class="card"><h2>Our simple rule</h2><p>Skye is better when the plan can bend. Check visibility before committing to the longer walks, and enjoy a viewpoint stop without turning every stop into a hike.</p><div class="callout"><strong>Protect the best bits:</strong> prioritise Storr and the Quiraing when visibility is good. Shorten the day by skipping Fairy Glen or a Portree stop.</div></div>
+</section>
+<section id="route" class="card anchor"><h2>A flexible Trotternish route</h2><p>Suggested order from Kyleakin. If you’re staying elsewhere, start at the closest point and adapt the loop.</p>
+<div class="route">
+  <article class="stop"><span class="num">1</span><h3>Old Man of Storr</h3><p>Choose the main hike only if weather, time and energy line up. The lower viewpoint can still be worthwhile.</p><small>Allow 1–2+ hours</small></article>
+  <article class="stop"><span class="num">2</span><h3>Lealt Falls</h3><p>A compact waterfall and coastal viewpoint break between the longer landscape stops.</p><small>Short stop</small></article>
+  <article class="stop"><span class="num">3</span><h3>Kilt Rock &amp; Mealt Falls</h3><p>A roadside viewpoint for the cliffs and waterfall dropping toward the sea.</p><small>Short stop</small></article>
+  <article class="stop"><span class="num">4</span><h3>The Quiraing</h3><p>Take in the viewpoint; add a short out-and-back walk if conditions are safe and you have time.</p><small>Allow 45–90 minutes</small></article>
+  <article class="stop"><span class="num">5</span><h3>Fairy Glen (optional)</h3><p>Small green hills and an easy wander. The ground can be uneven; skip it if the day is running long.</p><small>Optional stop</small></article>
+  <article class="stop"><span class="num">6</span><h3>Portree (optional)</h3><p>Save the harbour, food or a rest break for the way back if it suits your timing.</p><small>Flexible finish</small></article>
+  <article class="stop"><span class="num">↩</span><h3>Return to your base</h3><p>Leave a generous buffer for slow roads and changing conditions, especially later in the day.</p><small>Drive to daylight</small></article>
+  <article class="stop"><span class="num">★</span><h3>Keep the gaps</h3><p>The views from the road are part of the experience. Pull over only in safe, marked places.</p><small>Enjoy the journey</small></article>
+</div>
+<div class="buttons"><a class="btn" href="https://www.google.com/maps/dir/?api=1&origin=Kyleakin,+Isle+of+Skye&destination=Kyleakin,+Isle+of+Skye&waypoints=Old+Man+of+Storr%7CLealt+Falls%7CKilt+Rock%7CQuiraing%7CFairy+Glen%7CPortree" target="_blank" rel="noopener">Open route in Google Maps ↗</a><a class="btn alt" href="https://www.google.com/maps/search/?api=1&query=Isle+of+Skye+Trotternish" target="_blank" rel="noopener">Explore Skye map ↗</a></div>
+</section>
+<section id="map-section" class="card anchor"><h2>See the loop</h2><p class="mini">Tap a marker for the stop name. Use the Google Maps link above for live navigation.</p><div id="map" role="application" aria-label="Map of the north Isle of Skye route"></div><p class="mini">Map data © OpenStreetMap contributors.</p></section>
+<section id="pace" class="card anchor"><h2>Pick the pace that suits you</h2><div class="grid2">
+<div class="option"><h3>Viewpoints + relaxed walking</h3><ul><li>Keep Storr to the lower section or viewpoint if the full walk feels too much.</li><li>Enjoy Lealt Falls and Kilt Rock as short stops.</li><li>Take in the Quiraing from the roadside viewpoint.</li><li>Choose either Fairy Glen or extra time in Portree.</li></ul></div>
+<div class="option"><h3>Add a longer walk</h3><ul><li>Give Storr a dedicated window and check the route and conditions first.</li><li>At the Quiraing, walk only as far as feels comfortable, then turn back.</li><li>Drop optional stops before rushing the return drive.</li><li>Carry waterproof layers and shoes with grip.</li></ul></div>
+</div><div class="tip"><b>For mixed-energy groups:</b> agree on a meeting point and return time before anyone starts a longer walk. No one needs to complete the same route for everyone to enjoy the stop.</div></section>
+<section id="tips" class="card anchor"><h2>Before you set off</h2><div class="grid2">
+<div><ul><li>Check the local forecast and visibility again on the morning.</li><li>Check current parking arrangements, road conditions and any closures.</li><li>Fuel up before heading into quieter parts of the island.</li><li>Download an offline map; mobile signal can vary.</li><li>Bring a waterproof layer even when the start looks bright.</li></ul></div>
+<div><div class="callout"><strong>Keep it safe:</strong> use designated parking and passing places correctly; don’t stop on the road for photos. Check current CAA rules, airspace, local signs and landowner guidance before flying a drone.</div><p class="mini">Opening times, parking, access rules, weather and road conditions can change. Recheck them for your travel date.</p></div>
+</div><div class="source-links"><a href="https://www.traffic.gov.scot/" target="_blank" rel="noopener">Traffic Scotland ↗</a><a href="https://www.metoffice.gov.uk/weather/forecast/gfhyzz5e0" target="_blank" rel="noopener">Met Office forecast ↗</a><a href="https://www.caa.co.uk/drones/" target="_blank" rel="noopener">CAA drone guidance ↗</a><a href="https://www.highland.gov.uk/" target="_blank" rel="noopener">Highland Council ↗</a></div></section>
+</div></main>
+<footer><div class="footer-brand">MOSTLYGHUMO</div><div>Travel more. Plan better. Live fuller.</div><p>First-hand trip planning, made useful for your next journey.</p></footer>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const points=[
+ ["Kyleakin",57.27246,-5.73050],["Old Man of Storr",57.5073,-6.1833],["Lealt Falls",57.567,-6.157],["Kilt Rock & Mealt Falls",57.610,-6.172],["Quiraing",57.643,-6.265],["Fairy Glen",57.582,-6.326],["Portree",57.4125,-6.1946],["Kyleakin",57.27246,-5.73050]
+];
+const map=L.map("map",{scrollWheelZoom:false}).setView([57.48,-6.2],9);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:"© OpenStreetMap contributors"}).addTo(map);
+points.forEach((p,i)=>{if(i<points.length-1)L.marker([p[1],p[2]]).addTo(map).bindPopup("<b>"+p[0]+"</b>")});
+L.polyline(points.map(p=>[p[1],p[2]]),{color:"#2c6b68",weight:4,opacity:.85}).addTo(map);
+map.fitBounds(points.map(p=>[p[1],p[2]]),{padding:[25,25]});
+</script>
+</body></html>
